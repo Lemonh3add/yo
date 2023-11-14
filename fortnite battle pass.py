@@ -39,7 +39,7 @@ x = 0
 global paused
 paused = False
 global looped
-looped = False
+looped = True
 
 pygame.mixer.init()
 pygame.mixer.music.set_endevent(69)
@@ -324,14 +324,14 @@ play_button = Button(nav_bar, image=play_img, borderwidth=0, command= lambda: pa
 #stop_button = Button(nav_bar, image=pause_img,borderwidth=0, command= lambda: pause(paused))
 skipF_button = Button(nav_bar, image=skip_img,borderwidth=0, command = skip)
 go_back_button = Button(nav_bar, image=back_img,borderwidth=0,command = goBack)
-shuffle_button = Button(nav_bar, image=shuffle_img,borderwidth=0, command = mixemupcuh)
+shuffle_button = Button(nav_bar, image=loop_img,borderwidth=0, command = mixemupcuh)
 move_button = Button(button_bar, text="Move", command = move)
 nvm_button = Button(button_bar, text="Nvm", command = nvm)
 input_button = Button(button_bar, text = "Search", command = print_input)
 play_listbutton = Button(button_bar, text="ConvertPL", command = converted)
 video_button = Button(button_bar, text="ConvertVD", command = converted2)
 remove_button = Button(button_bar, text="Remove",command = remove)
-loop_button = Button(nav_bar, image=loop_img, command = lambda: loop(looped))
+loop_button = Button(nav_bar, image=shuffle_img, command = lambda: loop(looped))
 
 #chiefkeef_button = Button(base, image=chiefkeef,borderwidth=0, command = skip)
 
