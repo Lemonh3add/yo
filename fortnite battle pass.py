@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import ttk
 import pygame
 import os
 import random
@@ -18,7 +19,7 @@ from time import sleep
 
 base = Tk()
 base.title('pluh')
-base.geometry("500x600")
+base.geometry("500x620")
 player = pygame.image.load('images\\player.png')
 play_img = PhotoImage(file="images\play.png")
 skip_img = PhotoImage(file="images\skipF.png")
@@ -33,6 +34,15 @@ chiefkeef = chiefkeef.resize((50,50))
 chiefkeef = ImageTk.PhotoImage(chiefkeef)
 music_list = []
 current_song = []
+create1_playlist = []
+create2_playlist = []
+create3_playlist = []
+create4_playlist = []
+create5_playlist = []
+
+options = ['never', 'happening', 'lol']
+play_list = [[]]
+
 path = "music\\"
 i = 0
 x = 0
@@ -50,15 +60,6 @@ base.bind('<Left>', leftKey)
 def rightKey(event):
     skip()
 base.bind('<Right>', rightKey)
-
-def play2():
-    global current
-    pygame.mixer.music.load(path + music_list[i-1])
-    for i in range(len(music_list),):
-        current = music_list[i-1]
-        pygame.mixer.music.queue(path + music_list[i])
-        print(music_list[i])
-        pygame.mixer.music.play(0)
 
 def play():
         global i
@@ -145,12 +146,8 @@ def add():
     
 def subtract():
     global i
-    if i == len(music_list) - 1:
-        i -= 2
-        play()
-    else:
-        i -= 1
-        play()
+    i -= 1
+    play()
 
 def stop():
     pygame.mixer.music.stop()
@@ -204,7 +201,6 @@ def remove():
     print(len(music_list))
     os.remove("music\\" + index)
     
-
 def shovethatshitincuh():
     for files in os.listdir("music"):
         music_list.append(files)
@@ -290,6 +286,7 @@ def nvm():
 nav_bar = Frame(base)
 search_bar = Frame(base)
 button_bar = Frame(base)
+play_list_bar =Frame(base, pady=10)
 music_box = Listbox(base, bg="black", fg="yellow", selectbackground="green",width =80, height =20)
 music_box.pack(pady=20)
 
@@ -318,6 +315,7 @@ input_playlist = Listbox(search_bar, height = 5, width = 20)
 
 search_bar.pack()
 button_bar.pack()
+play_list_bar.pack()
 
 
 play_button = Button(nav_bar, image=play_img, borderwidth=0, command= lambda: pause(paused))
@@ -331,7 +329,11 @@ input_button = Button(button_bar, text = "Search", command = print_input)
 play_listbutton = Button(button_bar, text="ConvertPL", command = converted)
 video_button = Button(button_bar, text="ConvertVD", command = converted2)
 remove_button = Button(button_bar, text="Remove",command = remove)
-loop_button = Button(nav_bar, image=shuffle_img, command = lambda: loop(looped))
+loop_button = Button(nav_bar, image=shuffle_img,borderwidth=0, command = lambda: loop(looped))
+play_list_button = ttk.Combobox(play_list_bar, values=options)
+create_button = Button(play_list_bar,text="Create")
+select_button = Button(play_list_bar,text="Select")
+removePL_button = Button(play_list_bar,text="Remove")
 
 #chiefkeef_button = Button(base, image=chiefkeef,borderwidth=0, command = skip)
 
@@ -350,6 +352,11 @@ move_button.grid(row=0,column=3)
 nvm_button.grid(row=0,column=4)
 remove_button.grid(row=0,column=5)
 loop_button.grid(row=0,column=6)
+
+play_list_button.grid(row=0,column=0)
+select_button.grid(row=0,column=1)
+create_button.grid(row=0,column=2)
+removePL_button.grid(row=0,column=3)
 
 input_text.grid(row=1,column=0)
 input_playlist.grid(row=1, column=1)
