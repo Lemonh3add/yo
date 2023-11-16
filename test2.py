@@ -55,6 +55,7 @@ paused = False
 global looped
 looped = True
 
+
 pygame.mixer.init()
 pygame.mixer.music.set_endevent(69)
 def leftKey(event):
@@ -329,6 +330,7 @@ def remove_playlist():
     playlist_name = options[playlist_to_remove]
     shutil.rmtree("playlist\\" + playlist_name + "\\")
     input_text.delete('1.0', END)
+    play_list_button['values'] = options
     return print(playlist_name)
 
 def the_creation():
@@ -379,8 +381,8 @@ button_bar.pack()
 play_list_bar.pack()
 
 
-play_button = Button(nav_bar, image=play_img, borderwidth=0, command= lambda: pause(paused))
-#stop_button = Button(nav_bar, image=pause_img,borderwidth=0, command= lambda: pause(paused))
+play_button = Button(nav_bar, image=play_img, borderwidth=0, command= play)
+stop_button = Button(nav_bar, image=pause_img,borderwidth=0, command= lambda: pause(paused))
 skipF_button = Button(nav_bar, image=skip_img,borderwidth=0, command = skip)
 go_back_button = Button(nav_bar, image=back_img,borderwidth=0,command = goBack)
 shuffle_button = Button(nav_bar, image=loop_img,borderwidth=0, command = mixemupcuh)
@@ -404,9 +406,10 @@ removePL_button = Button(play_list_bar,text="Remove", command=remove_playlist)
 
 play_button.grid(row=0, column=3)
 #stop_button.grid(row=0, column=5)
-skipF_button.grid(row=0, column=4)
+skipF_button.grid(row=0, column=5)
 go_back_button.grid(row=0, column=2)
 shuffle_button.grid(row=0,column=0)
+stop_button.grid(row=0,column=4)
 
 
 input_button.grid(row=0,column=2)
